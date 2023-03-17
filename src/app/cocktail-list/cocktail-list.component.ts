@@ -10,9 +10,11 @@ import { Cocktails } from '../ICocktail';
 export class CocktailListComponent implements OnInit {
   cocktails: Cocktails[] = [];
 
-  constructor(private cocktailService: CocktailService) {}
+  constructor(public cocktailService: CocktailService) {}
 
   ngOnInit(): void {
-    this.cocktails = this.cocktailService.getCocktails();
+    this.cocktailService.getCocktails().subscribe((cocktailsFromJsonFile) => {
+      this.cocktails = cocktailsFromJsonFile;
+    });
   }
 }
